@@ -1,0 +1,120 @@
+openapi: "3.0.0"
+info:
+    version: "1.1.0"
+    title: "Expense Tracker API"
+    description: CRUD management of Expense Tracker
+servers:
+  - url: /api/v1
+  
+paths:
+    /expenses:
+        post:
+            operationId: AddExpense
+            summary: Create a new expense entry
+            requestBody:
+                description: Expense payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/ExpenseDTO"
+            responses:
+                201:
+                    description: The newly created expense
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ExpenseDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
+    /expenses/{id}:
+        parameters:
+            - in: path
+              name: id
+              description: The unique identifier
+              required: true
+              schema:
+                  $ref: "#/components/schemas/Id"
+        get:
+            operationId: GetExpense
+            summary: Fetch a expense
+            responses:
+                200:
+                    description: A expense
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ExpenseDTO"
+                404:
+                    description: No expense found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
+components:
+    schemas:
+        Id:
+            description: The unique identifier
+            type: string
+            format: uuid
+            nullable: false
+        
+        CategoryDTO:
+            type: object
+            properties:
+                id:
+                    $ref: "#/components/schemas/Id"
+                name:
+                    type: string
+
+        ExpenseDTO:
+            type: object
+            properties:
+                id:
+                    $ref: "#/components/schemas/Id"
+                title:
+                    type: string
+                description:
+                    type: string
+                category:
+                    $ref: "#/components/schemas/CategoryDTO"
+
+        CreateExpenseDTO:
+            type: object
+            properties:
+                id:
+                    $ref: "#/components/schemas/Id"
+                title:
+                    type: string
+                description:
+                    type: string
+                category_id:
+                    $ref: "#/components/schemas/Id"
+
+        ErrorDTO:
+            type: object
+            required:
+                - message
+            properties:
+                message:
+                    description: A human readable error message
+                    type: string
+
+    securitySchemes:
+        bearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+security:
+    - bearerAuth: []

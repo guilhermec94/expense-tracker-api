@@ -402,4 +402,7 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
+/ExpenseTrackerAPI.CodeGen/.gitignore
+/ExpenseTrackerAPI.CodeGen/ExpenseTrackerAPI.CodeGen.nuspec
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio
