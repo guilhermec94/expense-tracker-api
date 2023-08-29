@@ -24,7 +24,7 @@ namespace ExpenseTrackerAPI.CodeGen.Models
     /// 
     /// </summary>
     [DataContract]
-    public class CreateExpenseDTO 
+    public class UpdateExpenseDTO 
     {
         /// <summary>
         /// Gets or Sets Title

@@ -7,7 +7,156 @@ servers:
   - url: /api/v1
   
 paths:
+    /categories:
+        get:
+            operationId: GetAllCategories
+            parameters:
+                - in: query
+                  name: offset
+                  schema:
+                      type: integer
+                  description: The number of items to skip before starting to collect the result set
+                - in: query
+                  name: limit
+                  schema:
+                      type: integer
+                  description: The numbers of items to return
+            summary: Fetch a list of expense
+            responses:
+                200:
+                    description: A list of categories
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/CategoryDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        post:
+            operationId: AddCategory
+            summary: Create a new category entry
+            requestBody:
+                description: Category payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/CreateCategoryDTO"
+            responses:
+                201:
+                    description: The newly created category
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/CategoryDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
+    /categories/{id}:
+        parameters:
+            - in: path
+              name: id
+              description: The unique identifier
+              required: true
+              schema:
+                  $ref: "#/components/schemas/Id"
+        get:
+            operationId: GetCategory
+            summary: Fetch a category
+            responses:
+                200:
+                    description: A category
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/CategoryDTO"
+                404:
+                    description: No category found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        put:
+            operationId: UpdateCategory
+            summary: Update an existing category entry
+            requestBody:
+                description: Category payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/UpdateCategoryDTO"
+            responses:
+                204:
+                    description: The newly created category
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        delete:
+            operationId: DeleteCategory
+            summary: Delete an category
+            responses:
+                200:
+                    description: A category deleted
+                404:
+                    description: No category found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
     /expenses:
+        get:
+            operationId: GetAllExpenses
+            parameters:
+                - in: query
+                  name: offset
+                  schema:
+                      type: integer
+                  description: The number of items to skip before starting to collect the result set
+                - in: query
+                  name: limit
+                  schema:
+                      type: integer
+                  description: The numbers of items to return
+            summary: Fetch a list of expense
+            responses:
+                200:
+                    description: A list of expenses
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/ExpenseDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
         post:
             operationId: AddExpense
             summary: Create a new expense entry
@@ -16,7 +165,7 @@ paths:
                 content:
                     "application/json":
                         schema:
-                            $ref: "#/components/schemas/ExpenseDTO"
+                            $ref: "#/components/schemas/CreateExpenseDTO"
             responses:
                 201:
                     description: The newly created expense
@@ -61,6 +210,42 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/ErrorDTO"
+        put:
+            operationId: UpdateExpense
+            summary: Update an existing expense entry
+            requestBody:
+                description: Expense payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/UpdateExpenseDTO"
+            responses:
+                204:
+                    description: The newly created expense
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        delete:
+            operationId: DeleteExpense
+            summary: Delete an expense
+            responses:
+                200:
+                    description: A expense deleted
+                404:
+                    description: No expense found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
 
 components:
     schemas:
@@ -75,6 +260,18 @@ components:
             properties:
                 id:
                     $ref: "#/components/schemas/Id"
+                name:
+                    type: string
+
+        CreateCategoryDTO:
+            type: object
+            properties:
+                name:
+                    type: string
+        
+        UpdateCategoryDTO:
+            type: object
+            properties:
                 name:
                     type: string
 
@@ -93,8 +290,16 @@ components:
         CreateExpenseDTO:
             type: object
             properties:
-                id:
+                title:
+                    type: string
+                description:
+                    type: string
+                category_id:
                     $ref: "#/components/schemas/Id"
+        
+        UpdateExpenseDTO:
+            type: object
+            properties:
                 title:
                     type: string
                 description:

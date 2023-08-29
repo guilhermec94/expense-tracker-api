@@ -24,26 +24,13 @@ namespace ExpenseTrackerAPI.CodeGen.Models
     /// 
     /// </summary>
     [DataContract]
-    public class CreateExpenseDTO 
+    public class UpdateCategoryDTO 
     {
         /// <summary>
-        /// Gets or Sets Title
+        /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="title", EmitDefaultValue=false)]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
-        public string Description { get; set; }
-
-        /// <summary>
-        /// The unique identifier
-        /// </summary>
-        /// <value>The unique identifier</value>
-        [DataMember(Name="category_id", EmitDefaultValue=false)]
-        public Guid CategoryId { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
 
     }
 }
