@@ -307,6 +307,20 @@ components:
                 category_id:
                     $ref: "#/components/schemas/Id"
 
+        PaginationDTO:
+            type: object
+            properties:
+                page:
+                   type: integer
+                per_page:
+                   type: integer
+                total_records:
+                   type: integer
+            required:
+                - page
+                - per_page
+                - total_records
+
         ErrorDTO:
             type: object
             required:

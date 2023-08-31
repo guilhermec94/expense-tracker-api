@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ExpenseTrackerAPI.CodeGen.Models;
 using ExpenseTrackerAPI.Model;
 using ExpenseTrackerAPI.Repositories;
 using ExpenseTrackerAPI.Utils;
@@ -7,6 +8,7 @@ namespace ExpenseTrackerAPI.Services
 {
     public interface IBaseService<D> where D : class
     {
+        Task<(IEnumerable<D> data, PaginationDTO pagination)> GetAll(int? offset, int? limit);
         public Task<(D dto, RequestResultStatus status)> Get(Guid id);
         public Task<(D dto, RequestResultStatus status)> Create(D dto);
         public Task<RequestResultStatus> Update(Guid id, D dto);
@@ -21,6 +23,13 @@ namespace ExpenseTrackerAPI.Services
         {
             repo = repository;
             _mapper = mapper;
+        }
+
+        public Task<(IEnumerable<D> data, PaginationDTO pagination)> GetAll(int? offset, int? limit)
+        {
+            var res = repo.GetAll(offset, limit);
+            var pag = new PaginationDTO { Page = offset ?? 0, PerPage = limit ?? 0, TotalRecords = res.count };
+            return Task.FromResult((res.data.Select(x => _mapper.Map<D>(x)), pag));
         }
 
         public async Task<(D dto, RequestResultStatus status)> Get(Guid id)

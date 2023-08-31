@@ -3,9 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTrackerAPI.Repositories
 {
-    public class ExpenseRepository : BaseRepository<Expense, DbSet<Expense>>
+    public interface IExpenseRepository : IBaseRepository<Expense> { }
+    public class ExpenseRepository : BaseRepository<Expense, DbSet<Expense>>, IExpenseRepository
     {
-        public ExpenseRepository(ILogger logger, ExpenseTrackerContext ctx, DbSet<Expense> dbSet) : base(logger, ctx, dbSet)
+        public ExpenseRepository(ILogger<ExpenseRepository> logger, ExpenseTrackerContext ctx) : base(logger, ctx, ctx.Expenses)
         {
         }
     }

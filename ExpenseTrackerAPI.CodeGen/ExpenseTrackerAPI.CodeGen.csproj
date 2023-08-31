@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AssemblyName>ExpenseTrackerAPI.CodeGen</AssemblyName>
     <PackageId>ExpenseTrackerAPI.CodeGen</PackageId>
-    <UserSecretsId>0079c217-aae9-4315-bf44-e8c1f3a48751</UserSecretsId>
+    <UserSecretsId>ffd79cde-fbad-438f-aab2-e258bddc2b48</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>

@@ -16,6 +16,8 @@ namespace ExpenseTrackerAPI.Model
         {
             CreateMap<ExpenseDTO, Expense>();
             CreateMap<Expense, ExpenseDTO>();
+            CreateMap<CreateExpenseDTO, ExpenseDTO>().ForPath(dest => dest.Category.Id, opt => opt.MapFrom(x => x.CategoryId));
+            CreateMap<UpdateExpenseDTO, ExpenseDTO>().ForPath(dest => dest.Category.Id, opt => opt.MapFrom(x => x.CategoryId));
         }
     }
 }

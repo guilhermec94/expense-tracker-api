@@ -6,6 +6,7 @@ namespace ExpenseTrackerAPI.Repositories
 {
     public interface IBaseRepository<I> where I : BaseEntity
     {
+        (IEnumerable<I> data, int count) GetAll(int? offset, int? limit);
         Task<(I entity, RequestResultStatus status)> Get(Guid id);
         Task<(I entity, RequestResultStatus status)> Create(I entity);
         Task<RequestResultStatus> Update(I entity);
@@ -21,6 +22,12 @@ namespace ExpenseTrackerAPI.Repositories
             _logger = logger;
             Ctx = ctx;
             DbSet = dbSet;
+        }
+
+        public (IEnumerable<I> data, int count) GetAll(int? offset, int? limit)
+        {
+            var query = DbSet.Skip(offset.Value).Take(limit.Value);
+            return (query, query.Count());
         }
 
         public async Task<(I entity, RequestResultStatus status)> Get(Guid id)

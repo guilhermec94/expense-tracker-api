@@ -6,6 +6,7 @@ namespace ExpenseTrackerAPI.Handlers
 {
     public interface IBaseHandler<D> where D : class
     {
+        Task<IActionResult> GetAll(int? offset, int? limit);
         Task<IActionResult> Get(Guid id);
         Task<IActionResult> Add(D dto);
         Task<IActionResult> Update(Guid id, D dto);
@@ -18,6 +19,12 @@ namespace ExpenseTrackerAPI.Handlers
         public BaseHandler(IBaseService<D> service)
         {
             this.service = service;
+        }
+
+        public async Task<IActionResult> GetAll(int? offset, int? limit)
+        {
+            var (data, pag) = await service.GetAll(offset, limit);
+            return new OkObjectResult(new { data, pagination = pag });
         }
 
         public async Task<IActionResult> Get(Guid id)

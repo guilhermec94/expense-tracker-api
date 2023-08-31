@@ -1,4 +1,7 @@
+using ExpenseTrackerAPI.Handlers;
 using ExpenseTrackerAPI.Model;
+using ExpenseTrackerAPI.Repositories;
+using ExpenseTrackerAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +11,12 @@ var services = builder.Services;
 services.AddDbContext<ExpenseTrackerContext>(opt =>
     opt.UseNpgsql(builder.Configuration["ExpenseTrackerConnectionString:expensetrackerdb"])
     .UseSnakeCaseNamingConvention());
+
+
+services.AddLogging();
+services.AddScoped<IExpenseRepository, ExpenseRepository>();
+services.AddScoped<IExpenseService, ExpenseService>();
+services.AddScoped<IExpenseHandler, ExpenseHandler>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -27,8 +36,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "api/{controller}/{action=Index}/{id?}");
 
 app.Run();

@@ -40,23 +40,14 @@ namespace ExpenseTrackerAPI.Controllers
             throw new NotImplementedException();
         }
 
-        public override Task<IActionResult> GetAllExpenses([FromQuery(Name = "offset")] int? offset, [FromQuery(Name = "limit")] int? limit)
-        {
-            throw new NotImplementedException();
-        }
+        public override Task<IActionResult> GetAllExpenses([FromQuery(Name = "offset")] int? offset, [FromQuery(Name = "limit")] int? limit) => _expenseHandler.GetAll(offset, limit);
 
         public override Task<IActionResult> GetExpense([FromRoute(Name = "id"), Required] Guid id) => _expenseHandler.Get(id);
 
         public override Task<IActionResult> AddExpense([FromBody] CreateExpenseDTO createExpenseDTO) => _expenseHandler.Add(createExpenseDTO);
 
-        public override Task<IActionResult> UpdateExpense([FromRoute(Name = "id"), Required] Guid id, [FromBody] UpdateExpenseDTO updateExpenseDTO)
-        {
-            throw new NotImplementedException();
-        }
+        public override Task<IActionResult> UpdateExpense([FromRoute(Name = "id"), Required] Guid id, [FromBody] UpdateExpenseDTO updateExpenseDTO) => _expenseHandler.Update(id, updateExpenseDTO);
 
-        public override Task<IActionResult> DeleteExpense([FromRoute(Name = "id"), Required] Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public override Task<IActionResult> DeleteExpense([FromRoute(Name = "id"), Required] Guid id) => _expenseHandler.Delete(id);
     }
 }
