@@ -14,6 +14,8 @@ namespace ExpenseTrackerAPI.Model
         {
             CreateMap<CategoryDTO, Category>();
             CreateMap<Category, CategoryDTO>();
+            CreateMap<CreateCategoryDTO, CategoryDTO>();
+            CreateMap<UpdateCategoryDTO, CategoryDTO>();
         }
     }
 }

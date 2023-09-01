@@ -32,7 +32,7 @@ namespace ExpenseTrackerAPI.Repositories
 
         public async Task<(I entity, RequestResultStatus status)> Get(Guid id)
         {
-            var res = await DbSet.Where(x => x.ID == id).FirstOrDefaultAsync();
+            var res = await DbSet.AsNoTracking().Where(x => x.ID == id).FirstOrDefaultAsync();
             if (res == null)
             {
                 return (res, RequestResultStatus.NOT_FOUND);
@@ -59,9 +59,9 @@ namespace ExpenseTrackerAPI.Repositories
 
         public async Task<RequestResultStatus> Update(I entity)
         {
-            DbSet.Update(entity);
             try
             {
+                DbSet.Update(entity);
                 await Ctx.SaveChangesAsync();
             }
             catch (Exception ex)

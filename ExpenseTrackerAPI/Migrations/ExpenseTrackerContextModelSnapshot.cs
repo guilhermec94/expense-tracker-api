@@ -22,7 +22,7 @@ namespace ExpenseTrackerAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("expense_tracker.Model.Category", b =>
+            modelBuilder.Entity("ExpenseTrackerAPI.Model.Category", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,7 @@ namespace ExpenseTrackerAPI.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
-            modelBuilder.Entity("expense_tracker.Model.Expense", b =>
+            modelBuilder.Entity("ExpenseTrackerAPI.Model.Expense", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
@@ -50,6 +50,10 @@ namespace ExpenseTrackerAPI.Migrations
                     b.Property<Guid>("CategoryID")
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("date");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -70,12 +74,12 @@ namespace ExpenseTrackerAPI.Migrations
                     b.ToTable("expenses", (string)null);
                 });
 
-            modelBuilder.Entity("expense_tracker.Model.Expense", b =>
+            modelBuilder.Entity("ExpenseTrackerAPI.Model.Expense", b =>
                 {
-                    b.HasOne("expense_tracker.Model.Category", "Category")
+                    b.HasOne("ExpenseTrackerAPI.Model.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_expenses_categories_category_id");
 

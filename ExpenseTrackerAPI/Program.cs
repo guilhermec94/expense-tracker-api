@@ -14,16 +14,20 @@ services.AddDbContext<ExpenseTrackerContext>(opt =>
 
 
 services.AddLogging();
+services.AddScoped<ICategoryRepository, CategoryRepository>();
 services.AddScoped<IExpenseRepository, ExpenseRepository>();
+services.AddScoped<ICategoryService, CategoryService>();
 services.AddScoped<IExpenseService, ExpenseService>();
+services.AddScoped<ICategoryHandler, CategoryHandler>();
 services.AddScoped<IExpenseHandler, ExpenseHandler>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
 

@@ -10,6 +10,7 @@
 
 using ExpenseTrackerAPI.CodeGen.Attributes;
 using ExpenseTrackerAPI.CodeGen.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

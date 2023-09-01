@@ -39,6 +39,12 @@ namespace ExpenseTrackerAPI.CodeGen.Models
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or Sets Date
+        /// </summary>
+        [DataMember(Name="date", EmitDefaultValue=false)]
+        public string Date { get; set; }
+
+        /// <summary>
         /// The unique identifier
         /// </summary>
         /// <value>The unique identifier</value>
