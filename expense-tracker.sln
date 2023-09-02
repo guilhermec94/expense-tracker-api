@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTrackerAPI", "ExpenseTrackerAPI\ExpenseTrackerAPI.csproj", "{290BF153-F856-4511-B07B-75BABC8BE738}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTrackerAPI.CodeGen", "ExpenseTrackerAPI.CodeGen\ExpenseTrackerAPI.CodeGen.csproj", "{BC75226A-DEC9-4FCD-B29E-B7FC1F661991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTrackerAPI.CodeGen", "ExpenseTrackerAPI.CodeGen\ExpenseTrackerAPI.CodeGen.csproj", "{9FDFB974-0420-49C8-8EEA-E665E324172A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{290BF153-F856-4511-B07B-75BABC8BE738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{290BF153-F856-4511-B07B-75BABC8BE738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{290BF153-F856-4511-B07B-75BABC8BE738}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC75226A-DEC9-4FCD-B29E-B7FC1F661991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC75226A-DEC9-4FCD-B29E-B7FC1F661991}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC75226A-DEC9-4FCD-B29E-B7FC1F661991}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC75226A-DEC9-4FCD-B29E-B7FC1F661991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

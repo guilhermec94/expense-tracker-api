@@ -21,7 +21,7 @@ paths:
                   schema:
                       type: integer
                   description: The numbers of items to return
-            summary: Fetch a list of expense
+            summary: Fetch a list of categories
             responses:
                 200:
                     description: A list of categories
@@ -141,7 +141,7 @@ paths:
                   schema:
                       type: integer
                   description: The numbers of items to return
-            summary: Fetch a list of expense
+            summary: Fetch a list of expenses
             responses:
                 200:
                     description: A list of expenses
