@@ -9,12 +9,14 @@ namespace ExpenseTrackerAPI.Controllers
 {
     public class ApiController : DefaultApiController
     {
-        private readonly IExpenseHandler _expenseHandler;
         private readonly ICategoryHandler _categoryHandler;
-        public ApiController(IExpenseHandler expenseHandler, ICategoryHandler categoryHandler)
+        private readonly IExpenseHandler _expenseHandler;
+        private readonly IIncomeHandler _incomeHandler;
+        public ApiController(ICategoryHandler categoryHandler, IExpenseHandler expenseHandler, IIncomeHandler incomeHandler)
         {
-            _expenseHandler = expenseHandler;
             _categoryHandler = categoryHandler;
+            _expenseHandler = expenseHandler;
+            _incomeHandler = incomeHandler;
         }
 
         [Authorize("read:category")]
@@ -46,5 +48,21 @@ namespace ExpenseTrackerAPI.Controllers
 
         [Authorize("delete:expense")]
         public override Task<IActionResult> DeleteExpense([FromRoute(Name = "id"), Required] Guid id) => _expenseHandler.Delete(id);
+
+        [Authorize("read:income")]
+        public override Task<IActionResult> GetAllIncomes([FromQuery(Name = "offset")] int? offset, [FromQuery(Name = "limit")] int? limit) => _incomeHandler.GetAll(offset, limit);
+
+        [Authorize("read:income")]
+        public override Task<IActionResult> GetIncome([FromRoute(Name = "id"), Required] Guid id) => _incomeHandler.Get(id);
+
+        [Authorize("create:income")]
+        public override Task<IActionResult> AddIncome([FromBody] CreateIncomeDTO createIncomeDTO) => _incomeHandler.Add(createIncomeDTO);
+
+        [Authorize("update:income")]
+        public override Task<IActionResult> UpdateIncome([FromRoute(Name = "id"), Required] Guid id, [FromBody] UpdateIncomeDTO updateIncomeDTO) => _incomeHandler.Update(id, updateIncomeDTO);
+
+        [Authorize("delete:income")]
+        public override Task<IActionResult> DeleteIncome([FromRoute(Name = "id"), Required] Guid id) => _incomeHandler.Delete(id);
+
     }
 }

@@ -58,6 +58,21 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         public abstract Task<IActionResult> AddExpense([FromBody]CreateExpenseDTO createExpenseDTO);
 
         /// <summary>
+        /// Create a new income entry
+        /// </summary>
+        /// <param name="createIncomeDTO">Income payload</param>
+        /// <response code="201">The newly created incomes</response>
+        /// <response code="500">Unexpected error</response>
+        [HttpPost]
+        [Route("/api/v1/incomes")]
+        [Authorize]
+        [Consumes("application/json")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 201, type: typeof(IncomeDTO))]
+        [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
+        public abstract Task<IActionResult> AddIncome([FromBody]CreateIncomeDTO createIncomeDTO);
+
+        /// <summary>
         /// Delete an category
         /// </summary>
         /// <param name="id">The unique identifier</param>
@@ -88,6 +103,21 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         public abstract Task<IActionResult> DeleteExpense([FromRoute (Name = "id")][Required]Guid id);
 
         /// <summary>
+        /// Delete an income
+        /// </summary>
+        /// <param name="id">The unique identifier</param>
+        /// <response code="200">A income deleted</response>
+        /// <response code="404">No income found for the provided &#x60;Id&#x60;</response>
+        /// <response code="500">Unexpected error</response>
+        [HttpDelete]
+        [Route("/api/v1/incomes/{id}")]
+        [Authorize]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 404, type: typeof(ErrorDTO))]
+        [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
+        public abstract Task<IActionResult> DeleteIncome([FromRoute (Name = "id")][Required]Guid id);
+
+        /// <summary>
         /// Fetch a list of categories
         /// </summary>
         /// <param name="offset">The number of items to skip before starting to collect the result set</param>
@@ -116,6 +146,21 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         [ProducesResponseType(statusCode: 200, type: typeof(List<ExpenseDTO>))]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
         public abstract Task<IActionResult> GetAllExpenses([FromQuery (Name = "offset")]int? offset, [FromQuery (Name = "limit")]int? limit);
+
+        /// <summary>
+        /// Fetch a list of incomes
+        /// </summary>
+        /// <param name="offset">The number of items to skip before starting to collect the result set</param>
+        /// <param name="limit">The numbers of items to return</param>
+        /// <response code="200">A list of incomes</response>
+        /// <response code="500">Unexpected error</response>
+        [HttpGet]
+        [Route("/api/v1/incomes")]
+        [Authorize]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 200, type: typeof(List<IncomeDTO>))]
+        [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
+        public abstract Task<IActionResult> GetAllIncomes([FromQuery (Name = "offset")]int? offset, [FromQuery (Name = "limit")]int? limit);
 
         /// <summary>
         /// Fetch a category
@@ -150,6 +195,22 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         public abstract Task<IActionResult> GetExpense([FromRoute (Name = "id")][Required]Guid id);
 
         /// <summary>
+        /// Fetch a income
+        /// </summary>
+        /// <param name="id">The unique identifier</param>
+        /// <response code="200">A income</response>
+        /// <response code="404">No income found for the provided &#x60;Id&#x60;</response>
+        /// <response code="500">Unexpected error</response>
+        [HttpGet]
+        [Route("/api/v1/incomes/{id}")]
+        [Authorize]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 200, type: typeof(IncomeDTO))]
+        [ProducesResponseType(statusCode: 404, type: typeof(ErrorDTO))]
+        [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
+        public abstract Task<IActionResult> GetIncome([FromRoute (Name = "id")][Required]Guid id);
+
+        /// <summary>
         /// Update an existing category entry
         /// </summary>
         /// <param name="id">The unique identifier</param>
@@ -178,5 +239,20 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         [ValidateModelState]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
         public abstract Task<IActionResult> UpdateExpense([FromRoute (Name = "id")][Required]Guid id, [FromBody]UpdateExpenseDTO updateExpenseDTO);
+
+        /// <summary>
+        /// Update an existing income entry
+        /// </summary>
+        /// <param name="id">The unique identifier</param>
+        /// <param name="updateIncomeDTO">Income payload</param>
+        /// <response code="204">The newly created income</response>
+        /// <response code="500">Unexpected error</response>
+        [HttpPut]
+        [Route("/api/v1/incomes/{id}")]
+        [Authorize]
+        [Consumes("application/json")]
+        [ValidateModelState]
+        [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
+        public abstract Task<IActionResult> UpdateIncome([FromRoute (Name = "id")][Required]Guid id, [FromBody]UpdateIncomeDTO updateIncomeDTO);
     }
 }

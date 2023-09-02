@@ -247,6 +247,126 @@ paths:
                             schema:
                                 $ref: "#/components/schemas/ErrorDTO"
 
+    /incomes:
+        get:
+            operationId: GetAllIncomes
+            parameters:
+                - in: query
+                  name: offset
+                  schema:
+                      type: integer
+                  description: The number of items to skip before starting to collect the result set
+                - in: query
+                  name: limit
+                  schema:
+                      type: integer
+                  description: The numbers of items to return
+            summary: Fetch a list of incomes
+            responses:
+                200:
+                    description: A list of incomes
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "#/components/schemas/IncomeDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        post:
+            operationId: AddIncome
+            summary: Create a new income entry
+            requestBody:
+                description: Income payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/CreateIncomeDTO"
+            responses:
+                201:
+                    description: The newly created incomes
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/IncomeDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
+    /incomes/{id}:
+        parameters:
+            - in: path
+              name: id
+              description: The unique identifier
+              required: true
+              schema:
+                  $ref: "#/components/schemas/Id"
+        get:
+            operationId: GetIncome
+            summary: Fetch a income
+            responses:
+                200:
+                    description: A income
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/IncomeDTO"
+                404:
+                    description: No income found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        put:
+            operationId: UpdateIncome
+            summary: Update an existing income entry
+            requestBody:
+                description: Income payload
+                content:
+                    "application/json":
+                        schema:
+                            $ref: "#/components/schemas/UpdateIncomeDTO"
+            responses:
+                204:
+                    description: The newly created income
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+        delete:
+            operationId: DeleteIncome
+            summary: Delete an income
+            responses:
+                200:
+                    description: A income deleted
+                404:
+                    description: No income found for the provided `Id`
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+                500:
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/ErrorDTO"
+
 components:
     schemas:
         Id:
@@ -302,6 +422,44 @@ components:
                     $ref: "#/components/schemas/Id"
         
         UpdateExpenseDTO:
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                date:
+                    type: string
+                category_id:
+                    $ref: "#/components/schemas/Id"
+
+        IncomeDTO:
+            type: object
+            properties:
+                id:
+                    $ref: "#/components/schemas/Id"
+                title:
+                    type: string
+                description:
+                    type: string
+                date:
+                    type: string
+                category:
+                    $ref: "#/components/schemas/CategoryDTO"
+
+        CreateIncomeDTO:
+            type: object
+            properties:
+                title:
+                    type: string
+                description:
+                    type: string
+                date:
+                    type: string
+                category_id:
+                    $ref: "#/components/schemas/Id"
+        
+        UpdateIncomeDTO:
             type: object
             properties:
                 title:
