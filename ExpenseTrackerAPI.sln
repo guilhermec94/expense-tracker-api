@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTrackerAPI", "Expens
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTrackerAPI.CodeGen", "ExpenseTrackerAPI.CodeGen\ExpenseTrackerAPI.CodeGen.csproj", "{9FDFB974-0420-49C8-8EEA-E665E324172A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpenseTrackerAPITests", "ExpenseTrackerAPITests\ExpenseTrackerAPITests.csproj", "{698AEDC0-B029-4104-AB40-01B4D49240C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FDFB974-0420-49C8-8EEA-E665E324172A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698AEDC0-B029-4104-AB40-01B4D49240C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698AEDC0-B029-4104-AB40-01B4D49240C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698AEDC0-B029-4104-AB40-01B4D49240C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698AEDC0-B029-4104-AB40-01B4D49240C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
