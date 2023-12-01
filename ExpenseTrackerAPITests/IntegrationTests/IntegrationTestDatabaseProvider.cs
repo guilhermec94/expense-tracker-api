@@ -1,10 +1,5 @@
 ﻿using ExpenseTrackerAPI.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExpenseTrackerAPITests.IntegrationTests
 {
@@ -17,41 +12,27 @@ namespace ExpenseTrackerAPITests.IntegrationTests
             _connectionString = connectionString;
         }
 
-        public async Task<IntegrationTestDatabaseProvider> Build()
-        {
-            var dbContext = this.CreateDbContext();
-
-            await dbContext.Database.MigrateAsync();
-
-            var provider = new IntegrationTestDatabaseProvider(this._connectionString);
-
-            await provider.Seed();
-
-            return provider;
-        }
-
-        private async Task Seed()
-        {
-            await using var dbContext = this.CreateDbContext();
-
-            dbContext.Categories.Add(new Category
-            {
-                ID = Guid.NewGuid(),
-                Name = "Cat A",
-            });
-
-            await dbContext.SaveChangesAsync();
-        }
-
-        private ExpenseTrackerContext CreateDbContext()
+        public async Task<ExpenseTrackerContext> CreateDbContextAsync()
         {
             var dbContextOptionsBuilder = new DbContextOptionsBuilder<ExpenseTrackerContext>();
 
             dbContextOptionsBuilder.UseNpgsql(this._connectionString).UseSnakeCaseNamingConvention();
-
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             var dbContext = new ExpenseTrackerContext(dbContextOptionsBuilder.Options);
 
+            await dbContext.Database.MigrateAsync();
+
             return dbContext;
+        }
+
+        public async Task Seed(ExpenseTrackerContext dbContext, List<BaseEntity> data)
+        {
+            foreach (var entity in data)
+            {
+                dbContext.Add(entity);
+                await dbContext.SaveChangesAsync();
+            }
+
         }
     }
 }

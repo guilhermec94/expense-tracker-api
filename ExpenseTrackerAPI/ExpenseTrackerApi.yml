@@ -28,9 +28,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    $ref: "#/components/schemas/CategoryDTO"
+                                type: object
+                                properties:
+                                    data:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/CategoryDTO"
+                                    pagination:
+                                        $ref: "#/components/schemas/PaginationDTO"
+                                required:
+                                    - data
+                                    - pagination
                 500:
                     description: Unexpected error
                     content:
@@ -148,9 +156,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    $ref: "#/components/schemas/ExpenseDTO"
+                                type: object
+                                properties: 
+                                    data:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/ExpenseDTO"
+                                    pagination:
+                                        $ref: "#/components/schemas/PaginationDTO"
+                                required:
+                                    - data
+                                    - pagination
                 500:
                     description: Unexpected error
                     content:
@@ -268,9 +284,17 @@ paths:
                     content:
                         application/json:
                             schema:
-                                type: array
-                                items:
-                                    $ref: "#/components/schemas/IncomeDTO"
+                                type: object
+                                properties:
+                                    data:
+                                        type: array
+                                        items:
+                                            $ref: "#/components/schemas/IncomeDTO"
+                                    pagination:
+                                        $ref: "#/components/schemas/PaginationDTO"
+                                required:
+                                    - data
+                                    - pagination
                 500:
                     description: Unexpected error
                     content:

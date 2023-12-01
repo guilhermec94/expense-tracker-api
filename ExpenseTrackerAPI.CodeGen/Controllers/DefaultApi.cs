@@ -128,7 +128,7 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         [Route("/api/v1/categories")]
         [Authorize]
         [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<CategoryDTO>))]
+        [ProducesResponseType(statusCode: 200, type: typeof(GetAllCategories200Response))]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
         public abstract Task<IActionResult> GetAllCategories([FromQuery (Name = "offset")]int? offset, [FromQuery (Name = "limit")]int? limit);
 
@@ -143,7 +143,7 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         [Route("/api/v1/expenses")]
         [Authorize]
         [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<ExpenseDTO>))]
+        [ProducesResponseType(statusCode: 200, type: typeof(GetAllExpenses200Response))]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
         public abstract Task<IActionResult> GetAllExpenses([FromQuery (Name = "offset")]int? offset, [FromQuery (Name = "limit")]int? limit);
 
@@ -158,7 +158,7 @@ namespace ExpenseTrackerAPI.CodeGen.Controllers
         [Route("/api/v1/incomes")]
         [Authorize]
         [ValidateModelState]
-        [ProducesResponseType(statusCode: 200, type: typeof(List<IncomeDTO>))]
+        [ProducesResponseType(statusCode: 200, type: typeof(GetAllIncomes200Response))]
         [ProducesResponseType(statusCode: 500, type: typeof(ErrorDTO))]
         public abstract Task<IActionResult> GetAllIncomes([FromQuery (Name = "offset")]int? offset, [FromQuery (Name = "limit")]int? limit);
 
