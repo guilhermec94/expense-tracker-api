@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Testcontainers.PostgreSql;
 
-namespace ExpenseTracker.APITests.Factory
+namespace ExpenseTracker.Tests.Factory
 {
     public class IntegrationTestWebApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
     {

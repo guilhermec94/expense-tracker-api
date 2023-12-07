@@ -1,7 +1,7 @@
 ﻿using DotNet.Testcontainers.Containers;
 using Testcontainers.PostgreSql;
 
-namespace ExpenseTracker.APITests.IntegrationTests
+namespace ExpenseTracker.Tests.IntegrationTests
 {
     public class IntegrationTestFixture : IAsyncLifetime
     {

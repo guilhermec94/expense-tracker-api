@@ -6,7 +6,7 @@ using AppDomain = ExpenseTracker.Domain.Abstractions;
 
 namespace ExpenseTracker.Application.Services
 {
-    public class ExpenseService : BaseService<ExpenseDTO>, IExpenseService
+    public sealed class ExpenseService : BaseService<ExpenseDTO>, IExpenseService
     {
         private readonly AppDomain.IExpenseService _service;
         public ExpenseService(AppDomain.IExpenseService service) : base(service)

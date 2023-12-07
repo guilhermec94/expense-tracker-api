@@ -1,7 +1,8 @@
-﻿using ExpenseTracker.Domain.Entities;
+﻿using ExpenseTracker.Domain.Common;
+using ExpenseTracker.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace ExpenseTracker.APITests.IntegrationTests
+namespace ExpenseTracker.Tests.IntegrationTests
 {
     public class IntegrationTestDatabaseProvider
     {

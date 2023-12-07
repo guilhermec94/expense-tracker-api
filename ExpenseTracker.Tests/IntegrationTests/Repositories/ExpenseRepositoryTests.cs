@@ -1,6 +1,8 @@
-﻿using ExpenseTracker.Domain.Entities;
-using ExpenseTracker.API.Repositories;
-using ExpenseTracker.API.Utils;
+﻿using ExpenseTracker.Domain.Common;
+using ExpenseTracker.Domain.Entities;
+using ExpenseTracker.Persistence.Repositories;
+using ExpenseTracker.SharedKernel.Utils;
+using ExpenseTracker.Tests.IntegrationTests;
 using Microsoft.Extensions.Logging;
 using Moq;
 
